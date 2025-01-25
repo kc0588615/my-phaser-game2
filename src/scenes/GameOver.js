@@ -1,28 +1,45 @@
-import { Scene } from 'phaser';
+import Phaser from 'phaser';
 
-export class GameOver extends Scene
-{
-    constructor ()
-    {
+export class GameOver extends Phaser.Scene {
+    constructor() {
         super('GameOver');
     }
 
-    create ()
-    {
-        this.cameras.main.setBackgroundColor(0xff0000);
+    create(data) {
+        // Show final score
+        this.add.text(
+            this.sys.game.config.width / 2,
+            this.sys.game.config.height / 2 - 100,
+            'Game Over',
+            {
+                fontSize: '64px',
+                color: '#FFFFFF'
+            }
+        ).setOrigin(0.5);
 
-        this.add.image(512, 384, 'background').setAlpha(0.5);
+        this.add.text(
+            this.sys.game.config.width / 2,
+            this.sys.game.config.height / 2,
+            `Final Score: ${data.score}`,
+            {
+                fontSize: '32px',
+                color: '#FFFFFF'
+            }
+        ).setOrigin(0.5);
 
-        this.add.text(512, 384, 'Game Over', {
-            fontFamily: 'Arial Black', fontSize: 64, color: '#ffffff',
-            stroke: '#000000', strokeThickness: 8,
-            align: 'center'
-        }).setOrigin(0.5);
+        this.add.text(
+            this.sys.game.config.width / 2,
+            this.sys.game.config.height / 2 + 100,
+            'Click to Play Again',
+            {
+                fontSize: '32px',
+                color: '#FFFFFF'
+            }
+        ).setOrigin(0.5);
 
+        // Return to menu on click
         this.input.once('pointerdown', () => {
-
             this.scene.start('MainMenu');
-
         });
     }
 }

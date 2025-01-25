@@ -1,3 +1,4 @@
+import Phaser from 'phaser';
 import { Boot } from './scenes/Boot';
 import { Game } from './scenes/Game';
 import { GameOver } from './scenes/GameOver';
@@ -15,6 +16,10 @@ const config = {
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
+    },
+    input: {
+        activePointers: 1,
+        topOnly: false
     },
     scene: [
         Boot,
